@@ -23,7 +23,7 @@ namespace my_library {
     friend class list<_Tp>;
 
     public:
-      typedef typename list_iterator<_Tp> iterator;
+      typedef list_iterator<_Tp> iterator;
       typedef size_t size_type;
       typedef _Tp value_type;
       typedef _Tp& reference;

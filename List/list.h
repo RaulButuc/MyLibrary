@@ -16,7 +16,7 @@ namespace my_library {
   class list {
 
     public:
-      typedef typename list_iterator<_Tp> iterator;
+      typedef list_iterator<_Tp> iterator;
 
       list();
       ~list();
