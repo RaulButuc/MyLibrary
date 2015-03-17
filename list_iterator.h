@@ -9,9 +9,13 @@
 
 #include <cassert>
 #include <iterator>
+#include "list.h"
 #include "list_node.h"
 
 namespace my_library {
+
+  template <class _Tp> class list;
+  template <class _Tp> class list_node;
 
   template <class _Tp>
   class list_iterator {
@@ -19,7 +23,7 @@ namespace my_library {
     friend class list<_Tp>;
 
     public:
-      typedef list_iterator<_Tp> iterator;
+      typedef typename list_iterator<_Tp> iterator;
       typedef size_t size_type;
       typedef _Tp value_type;
       typedef _Tp& reference;
@@ -29,8 +33,8 @@ namespace my_library {
 
       const iterator& operator++();
       const iterator& operator++(int);
-      reference operator*();
-      pointer operator->();
+      reference operator*() const;
+      pointer operator->() const;
       bool operator==(const iterator&) const;
       bool operator!=(const iterator&) const;
 
@@ -44,37 +48,37 @@ namespace my_library {
   list_iterator<_Tp>::list_iterator(list_node<_Tp>* pNode) : m_pNode(pNode) {}
 
   template <class _Tp>
-  const list_iterator<_Tp>::iterator& list_iterator<_Tp>::operator++() {
+  const typename list_iterator<_Tp>::iterator& list_iterator<_Tp>::operator++() {
     assert(m_pNode != NULL);
     m_pNode = m_pNode->m_pNext;
     return *this;
   }
 
   template <class _Tp>
-  const list_iterator<_Tp>::iterator& list_iterator<_Tp>::operator++(int) {
+  const typename list_iterator<_Tp>::iterator& list_iterator<_Tp>::operator++(int) {
     list_iterator<_Tp>::iterator _tmp = *this;
     ++(*this);
     return _tmp;
   }
 
   template <class _Tp>
-  list_iterator<_Tp>::reference list_iterator<_Tp>::operator*() {
+  typename list_iterator<_Tp>::reference list_iterator<_Tp>::operator*() const {
     return m_pNode->m_Node;
   }
 
   template <class _Tp>
-  list_iterator<_Tp>::pointer list_iterator<_Tp>::operator->() {
+  typename list_iterator<_Tp>::pointer list_iterator<_Tp>::operator->() const {
     return m_pNode;
   }
 
   template <class _Tp>
-  bool list_iterator<_Tp>::operator==(const list_iterator<_Tp>::iterator& other) const {
-    return m_pNode == other->m_pNode;
+  bool list_iterator<_Tp>::operator==(const typename list_iterator<_Tp>::iterator& other) const {
+    return m_pNode == other.m_pNode;
   }
 
   template <class _Tp>
-  bool list_iterator<_Tp>::operator!=(const list_iterator<_Tp>::iterator& other) const {
-    return m_pNode != other->m_pNode;
+  bool list_iterator<_Tp>::operator!=(const typename list_iterator<_Tp>::iterator& other) const {
+    return m_pNode != other.m_pNode;
   }
 
 }

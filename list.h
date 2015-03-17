@@ -16,7 +16,7 @@ namespace my_library {
   class list {
 
     public:
-      typedef list_iterator<_Tp> iterator;
+      typedef typename list_iterator<_Tp> iterator;
 
       list();
       ~list();
@@ -58,12 +58,12 @@ namespace my_library {
   }
 
   template <class _Tp>
-  list<_Tp>::iterator list<_Tp>::begin() {
+  typename list<_Tp>::iterator list<_Tp>::begin() {
     return list_iterator<_Tp>(m_pHead);
   }
 
   template <class _Tp>
-  list<_Tp>::iterator list<_Tp>::end() {
+  typename list<_Tp>::iterator list<_Tp>::end() {
     return list_iterator<_Tp>(NULL);
   }
 
