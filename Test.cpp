@@ -6,6 +6,7 @@
  */
 
 #include <iostream>
+#include <algorithm>
 #include "list.h"
 
 using std::cout;
@@ -28,6 +29,25 @@ int main(int argc, char* argv[]) {
     std::cout << *it << " ";
   }
   std::cout << "\n";
+
+  short first_value = 50;
+  short second_value = 23;
+
+  it = std::find(my_list.begin(), my_list.end(), first_value);
+  if (it != my_list.end()) {
+    std::cout << "Element " << first_value << " found!" << "\n";
+  }
+  else {
+    std::cout << "Element " << first_value << " not found!" << "\n";
+  }
+
+  it = std::find(my_list.begin(), my_list.end(), second_value);
+  if (it != my_list.end()) {
+    std::cout << "Element " << second_value << " found!" << "\n";
+  }
+  else {
+    std::cout << "Element " << second_value << " not found!" << "\n";
+  }
 
   system("pause");
   return 0;
