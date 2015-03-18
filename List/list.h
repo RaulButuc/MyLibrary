@@ -2,7 +2,7 @@
  *  list.h
  *
  *  @author Raul Butuc.
- *  @version 1.0.1 18/03/2015
+ *  @version 1.0.2 18/03/2015
  */
 
 #pragma once
@@ -21,6 +21,10 @@ namespace my_library {
       typedef list_const_iterator<_Tp> const_iterator;
 
       list();
+      explicit list(size_t, const _Tp&);
+      list(iterator, iterator);
+      list(const_iterator, const_iterator);
+      list(const list&);
       ~list();
 
       bool empty() const;
@@ -38,6 +42,35 @@ namespace my_library {
   
   template <class _Tp>
   list<_Tp>::list() : m_pHead(NULL), m_pTail(NULL) {}
+
+  template <class _Tp>
+  list<_Tp>::list(size_t nr, const _Tp& value) {
+    for (size_t index = 0; index < nr; ++index) {
+      push_back(value);
+    }
+  }
+
+  template <class _Tp>
+  list<_Tp>::list(iterator first, iterator last) {
+    for (; first != last; ++first) {
+      push_back(*first);
+    }
+  }
+
+  template <class _Tp>
+  list<_Tp>::list(const_iterator first, const_iterator last) {
+    for (; first != last; ++first) {
+      push_back(*first);
+    }
+  }
+
+  template <class _Tp>
+  list<_Tp>::list(const list& _list) {
+    const_iterator it = _list.begin();
+    for (; it != _list.end(); ++it) {
+      push_back(*it);
+    }
+  }
 
   template <class _Tp>
   list<_Tp>::~list() {
