@@ -29,7 +29,7 @@ namespace my_library {
       typedef _Tp& reference;
       typedef _Tp* pointer;
       typedef std::forward_iterator_tag iterator_category;
-      typedef int difference_type;
+      typedef size_t difference_type;
 
       const iterator& operator++();
       const iterator& operator++(int);
@@ -40,6 +40,7 @@ namespace my_library {
 
     private:
       list_node<_Tp>* m_pNode;
+
       list_iterator(list_node<_Tp>*);
 
   };
