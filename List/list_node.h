@@ -2,7 +2,7 @@
  *  list_node.h
  *
  *  @author Raul Butuc.
- *  @version 1.0.0 16/03/2015
+ *  @version 1.0.1 18/03/2015
  */
 
 #pragma once
