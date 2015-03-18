@@ -2,13 +2,14 @@
  *  list.h
  *
  *  @author Raul Butuc.
- *  @version 1.0.0 16/03/2015
+ *  @version 1.0.1 18/03/2015
  */
 
 #pragma once
 
 #include "list_node.h"
 #include "list_iterator.h"
+#include "list_const_iterator.h"
 
 namespace my_library {
 
@@ -17,6 +18,7 @@ namespace my_library {
 
     public:
       typedef list_iterator<_Tp> iterator;
+      typedef list_const_iterator<_Tp> const_iterator;
 
       list();
       ~list();
@@ -26,6 +28,8 @@ namespace my_library {
 
       iterator begin();
       iterator end();
+      const_iterator begin() const;
+      const_iterator end() const;
 
     private:
       list_node<_Tp>* m_pHead;
@@ -65,6 +69,16 @@ namespace my_library {
   template <class _Tp>
   typename list<_Tp>::iterator list<_Tp>::end() {
     return list_iterator<_Tp>(NULL);
+  }
+
+  template <class _Tp>
+  typename list<_Tp>::const_iterator list<_Tp>::begin() const {
+    return list_const_iterator<_Tp>(m_pHead);
+  }
+
+  template <class _Tp>
+  typename list<_Tp>::const_iterator list<_Tp>::end() const {
+    return list_const_iterator<_Tp>(NULL);
   }
 
 }
