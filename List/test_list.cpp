@@ -2,7 +2,7 @@
  *  Test.cpp
  *
  *  @author Raul Butuc.
- *  @version 1.0.0 16/03/2015
+ *  @version 1.0.1 18/03/2015
  */
 
 #include <iostream>
@@ -14,25 +14,25 @@ using std::find;
 using namespace my_library;
 
 int main(int argc, char* argv[]) {
-  list<short> my_list;
+  list<char> my_list;
 
   if (my_list.empty()) {
     cout << "List is empty" << "\n";
   }
 
-  for (int i = 0; i < 100; i += 10) {
+  for (char i = 'a'; i < 'z'; i += 2) {
     my_list.push_back(i);
   }
-
-  list<short>::iterator it = my_list.begin();
+  
+  list<char>::iterator it = my_list.begin();
 
   for (; it != my_list.end(); ++it) {
     cout << *it << " ";
   }
   cout << "\n";
 
-  short first_value = 50;
-  short second_value = 23;
+  char first_value = 'w';
+  char second_value = 'S';
 
   it = find(my_list.begin(), my_list.end(), first_value);
   if (it != my_list.end()) {
