@@ -16,7 +16,7 @@ using std::string;
 using namespace my_library;
 
 int main(int argc, char* argv[]) {
-  // Declare a new singly linked list with the first 5 elements initialised to 'Y'.
+  // Create a new singly linked list with the first 3 elements initialised to 'Y'.
   list<char> my_list(3, 'Y');
 
   // Check whether the list is or is not empty.
