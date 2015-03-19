@@ -118,7 +118,9 @@ namespace my_library {
 
   template <class _Tp>
   void list<_Tp>::clear() {
-    while (m_pHead != nullptr) { pop(); }
+    while (m_pHead != nullptr) {
+      pop();
+    }
   }
 
   template <class _Tp>
@@ -130,8 +132,8 @@ namespace my_library {
   void list<_Tp>::push(const _Tp& node) {
     list_node<_Tp>* _node = new list_node<_Tp>(node, nullptr);
 
-    if (m_pHead == nullptr) { m_pHead = _node; }
-    else { m_pTail->m_pNext = _node; }
+    if (m_pHead == nullptr) m_pHead = _node;
+    else m_pTail->m_pNext = _node;
 
     m_pTail = _node;
     m_Size++;
