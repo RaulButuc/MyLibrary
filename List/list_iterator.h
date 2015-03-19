@@ -50,7 +50,7 @@ namespace my_library {
 
   template <class _Tp>
   const typename list_iterator<_Tp>::iterator& list_iterator<_Tp>::operator++() {
-    assert(m_pNode != NULL);
+    assert(m_pNode != nullptr);
     m_pNode = m_pNode->m_pNext;
     return *this;
   }
