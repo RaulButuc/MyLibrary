@@ -3,14 +3,14 @@ A personal and custom library that will eventually contain all the common data s
 
 ### Data structures included so far
 
-- Singly Linked List
+- Singly Linked List (Forward List)
 
 ### Coming soon
 
-- Doubly Linked List
+- Doubly Linked List (List)
 - Stack
 - Queue
 - Double Ended Queue (Deque)
 - Set
 - Map
-- And many others
+- And many others to follow
