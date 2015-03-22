@@ -25,7 +25,7 @@ int main(int argc, char* argv[]) {
 
   // Add some characters to the list.
   for (char i = 'a'; i < 'z'; i += 2) {
-    my_list.push(i);
+    my_list.push_back(i);
   }
   
   // Get an iterator for the first element.
@@ -87,9 +87,9 @@ int main(int argc, char* argv[]) {
   }
   cout << "(" << new_list.size() << " elements)" << "\n";
 
-  // Pop the last two elements.
-  new_list.pop();
-  new_list.pop();
+  // pop_back the last two elements.
+  new_list.pop_back();
+  new_list.pop_back();
 
   // Get an iterator for the first element of the new list and print the list out.
   new_list_it = new_list.begin();
