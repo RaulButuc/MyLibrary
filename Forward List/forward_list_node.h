@@ -2,7 +2,7 @@
  *  forward_list_node.h
  *
  *  @author Raul Butuc.
- *  @version 1.1.0 21/03/2015
+ *  @version 1.1.1 23/03/2015
  */
 
 #pragma once
@@ -21,7 +21,7 @@ namespace my_library {
     friend class forward_list_const_iterator<_Tp>;
 
     private:
-      _Tp m_Node;
+      _Tp m_Data;
       forward_list_node<_Tp>* m_pNext;
 
       forward_list_node(const _Tp&, forward_list_node<_Tp>*);
@@ -29,7 +29,7 @@ namespace my_library {
   };
 
   template <class _Tp>
-  forward_list_node<_Tp>::forward_list_node(const _Tp& node, forward_list_node<_Tp>* next) : m_Node(node), m_pNext(next) {}
+  forward_list_node<_Tp>::forward_list_node(const _Tp& data, forward_list_node<_Tp>* next) : m_Data(data), m_pNext(next) {}
 
   template <class _Tp>
   forward_list_node<_Tp>::~forward_list_node() {
