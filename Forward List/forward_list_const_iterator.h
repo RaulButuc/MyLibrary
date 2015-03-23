@@ -2,7 +2,7 @@
  *  forward_list_const_iterator.h
  *
  *  @author Raul Butuc.
- *  @version 1.1.0 21/03/2015
+ *  @version 1.1.1 23/03/2015
  */
 
 #pragma once
@@ -64,7 +64,7 @@ namespace my_library {
 
   template <class _Tp>
   typename forward_list_const_iterator<_Tp>::reference forward_list_const_iterator<_Tp>::operator*() const {
-    return m_pNode->m_Node;
+    return m_pNode->m_Data;
   }
 
   template <class _Tp>
