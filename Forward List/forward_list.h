@@ -2,12 +2,12 @@
  *  forward_list.h
  *
  *  @author Raul Butuc.
- *  @version 1.2.1 24/03/2015
+ *  @version 1.2.2 25/03/2015
  */
 
 #pragma once
 
-#include <algorithm>
+#include <utility>
 #include "forward_list_node.h"
 #include "forward_list_iterator.h"
 #include "forward_list_const_iterator.h"
@@ -18,12 +18,15 @@
 #define NOEXCEPT
 #endif
 
+using std::move;
+
 namespace my_library {
 
   template <class _Tp>
   class forward_list {
 
     public:
+      typedef _Tp value_type;
       typedef forward_list_iterator<_Tp> iterator;
       typedef forward_list_const_iterator<_Tp> const_iterator;
 
@@ -90,8 +93,8 @@ namespace my_library {
 
   template <class _Tp>
   forward_list<_Tp>::forward_list(forward_list<_Tp>&& _forward_list) : m_pHead(nullptr) {
-    std::move(_forward_list.begin(), _forward_list.end(), *this);
-    _forward_list.~forward_list();
+    *this = move(_forward_list);
+    _forward_list.m_pHead = nullptr;
   }
 
   template <class _Tp>
@@ -172,8 +175,10 @@ namespace my_library {
 
   template <class _Tp>
   forward_list<_Tp>& forward_list<_Tp>::operator=(forward_list<_Tp>&& _forward_list) {
-    std::move(_forward_list.begin(), _forward_list.end(), *this);
-    _forward_list.~forward_list();
+    if (this != &_forward_list) {
+      m_pHead = move(_forward_list).m_pHead;
+      _forward_list.m_pHead = nullptr;
+    }
     return *this;
   }
 
