@@ -43,12 +43,18 @@ namespace my_library {
       void assign(const_iterator, const_iterator);
       iterator begin() NOEXCEPT;
       const_iterator begin() const NOEXCEPT;
+      const_iterator cbegin() const NOEXCEPT;
       void clear() NOEXCEPT;
       bool empty() const NOEXCEPT;
       iterator end() NOEXCEPT;
       const_iterator end() const NOEXCEPT;
+      const_iterator cend() const NOEXCEPT;
       _Tp& front();
       const _Tp& front() const;
+      void insert_after(const_iterator, const _Tp&);
+      void insert_after(const_iterator, _Tp&&);
+      void insert_after(const_iterator, size_t, const _Tp&);
+      void insert_after(const_iterator, iterator, iterator);
       forward_list<_Tp>& operator=(const forward_list<_Tp>&);
       forward_list<_Tp>& operator=(forward_list<_Tp>&&);
       void pop_front();
@@ -132,7 +138,12 @@ namespace my_library {
   }
 
   template <class _Tp>
-  typename forward_list<_Tp>::const_iterator forward_list<_Tp>::begin() const NOEXCEPT{
+  typename forward_list<_Tp>::const_iterator forward_list<_Tp>::begin() const NOEXCEPT {
+    return forward_list_const_iterator<_Tp>(m_pHead);
+  }
+
+  template <class _Tp>
+  typename forward_list<_Tp>::const_iterator forward_list<_Tp>::cbegin() const NOEXCEPT {
     return forward_list_const_iterator<_Tp>(m_pHead);
   }
 
@@ -158,6 +169,11 @@ namespace my_library {
   }
   
   template <class _Tp>
+  typename forward_list<_Tp>::const_iterator forward_list<_Tp>::cend() const NOEXCEPT{
+    return forward_list_const_iterator<_Tp>(nullptr);
+  }
+
+  template <class _Tp>
   _Tp& forward_list<_Tp>::front() {
     return m_pHead->m_Data;
   }
@@ -165,6 +181,31 @@ namespace my_library {
   template <class _Tp>
   const _Tp& forward_list<_Tp>::front() const {
     return m_pHead->m_Data;
+  }
+
+  template <class _Tp>
+  void forward_list<_Tp>::insert_after(const_iterator position, const _Tp& value) {
+    forward_list_node<_Tp>* _node = new forward_list_node<_Tp>(value, position.m_pNode->m_pNext);
+    position.m_pNode->m_pNext = _node;
+  }
+
+  template <class _Tp>
+  void forward_list<_Tp>::insert_after(const_iterator position, _Tp&& value) {
+    forward_list_node<_Tp>* _node = new forward_list_node<_Tp>(move(value), position.m_pNode->m_pNext);
+    position.m_pNode->m_pNext = _node;
+  }
+
+  template <class _Tp>
+  void forward_list<_Tp>::insert_after(const_iterator position, size_t num, const _Tp& value) {
+    for (size_t i = 0; i < num; ++i)
+      this->insert_after(position, value);
+  }
+
+  template <class _Tp>
+  void forward_list<_Tp>::insert_after(const_iterator position, iterator first, iterator last){
+    for (; first != last; ++position, ++first) {
+      this->insert_after(position, *first);
+    }
   }
   
   template <class _Tp>
