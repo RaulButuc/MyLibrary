@@ -7,13 +7,16 @@
 
 #include <iostream>
 #include <algorithm>
+#include <utility>
 #include <string>
 #include "forward_list.h"
 
 using std::cout;
 using std::find;
 using std::string;
-using namespace my_library;
+using my_library::forward_list;
+
+forward_list<char> addOne(const forward_list<char>&);
 
 int main(int argc, char* argv[]) {
   // Declare a new singly linked list with the first 5 elements initialised to 'Y'.
@@ -150,7 +153,30 @@ int main(int argc, char* argv[]) {
     cout << *it << " ";
   }
   cout << "\n";
+  
+  // Move the temporary contents returned by the addOne function into my_list.
+  my_list = addOne(my_list);
+
+  // Get an iterator for the first element of my_list and print the list out.
+  it = my_list.begin();
+  cout << " o Print the elements of my_list: ";
+  for (; it != my_list.end(); ++it) {
+    cout << *it << " ";
+  }
+  cout << "\n";
 
   system("pause");
   return 0;
+}
+
+forward_list<char> addOne(const forward_list<char>& _forward_list) {
+  forward_list<char> result;
+  
+  forward_list<char>::const_iterator it = _forward_list.begin();
+  for (; it != _forward_list.end(); ++it) {
+    result.push_front((*it) + 1);
+  }
+  result.reverse();
+  
+  return result;
 }
