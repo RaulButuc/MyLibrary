@@ -2,7 +2,7 @@
  *  forward_list_iterator.h
  *
  *  @author Raul Butuc.
- *  @version 1.1.1 23/03/2015
+ *  @version 1.1.2 25/03/2015
  */
 
 #pragma once
@@ -33,6 +33,7 @@ namespace my_library {
 
       const iterator& operator++();
       const iterator& operator++(int);
+      const iterator& operator+=(int);
       reference operator*() const;
       pointer operator->() const;
       bool operator==(const iterator&) const;
@@ -57,9 +58,15 @@ namespace my_library {
 
   template <class _Tp>
   const typename forward_list_iterator<_Tp>::iterator& forward_list_iterator<_Tp>::operator++(int) {
-    forward_list_iterator<_Tp>::iterator _tmp = *this;
     ++(*this);
-    return _tmp;
+    return *this;
+  }
+
+  template <class _Tp>
+  const typename forward_list_iterator<_Tp>::iterator& forward_list_iterator<_Tp>::operator+=(int num) {
+    for (int i = 0; i < num; ++i)
+      ++(*this);
+    return *this;
   }
 
   template <class _Tp>
