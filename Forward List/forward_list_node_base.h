@@ -10,7 +10,7 @@
 namespace my_library {
   
   class forward_list_node_base {
-    
+
     public:
       forward_list_node_base* m_pNext;
 
