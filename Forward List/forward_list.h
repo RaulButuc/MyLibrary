@@ -2,7 +2,7 @@
  *  forward_list.h
  *
  *  @author Raul Butuc.
- *  @version 1.3.0 26/03/2015
+ *  @version 1.3.1 27/03/2015
  */
 
 #pragma once
@@ -45,7 +45,7 @@ namespace my_library {
       const_iterator before_begin() const NOEXCEPT;
       iterator begin() NOEXCEPT;
       const_iterator begin() const NOEXCEPT;
-      const_iterator cbefore_begin() const NOEXCEPT;
+      const_iterator cbefore_begin() NOEXCEPT;
       const_iterator cbegin() const NOEXCEPT;
       const_iterator cend() const NOEXCEPT;
       void clear() NOEXCEPT;
@@ -102,7 +102,7 @@ namespace my_library {
   template <class _Tp>
   forward_list<_Tp>::forward_list(forward_list<_Tp>&& _forward_list)
       : m_pHead() {
-    m_pHead.m_pNext = move(_forward_list.m_pHead).m_pNext;
+    *this = move(_forward_list);
     _forward_list.m_pHead.m_pNext = nullptr;
   }
 
@@ -152,8 +152,8 @@ namespace my_library {
 
   template <class _Tp>
   typename forward_list<_Tp>::const_iterator
-  forward_list<_Tp>::cbefore_begin() const NOEXCEPT {
-    return forward_list_const_iterator<_Tp>(static_cast<forward_list_node_base*>(&m_pHead));
+  forward_list<_Tp>::cbefore_begin() NOEXCEPT {
+    return forward_list_const_iterator<_Tp>(&m_pHead);
   }
 
   template <class _Tp>
