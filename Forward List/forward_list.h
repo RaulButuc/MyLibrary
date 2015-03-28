@@ -2,7 +2,7 @@
  *  forward_list.h
  *
  *  @author Raul Butuc.
- *  @version 1.3.1 27/03/2015
+ *  @version 1.3.2 28/03/2015
  */
 
 #pragma once
@@ -17,9 +17,6 @@
 #else
 #define NOEXCEPT
 #endif
-
-using std::move;
-using std::swap;
 
 namespace my_library {
 
@@ -52,6 +49,8 @@ namespace my_library {
       bool empty() const NOEXCEPT;
       iterator end() NOEXCEPT;
       const_iterator end() const NOEXCEPT;
+      iterator erase_after(const_iterator);
+      iterator erase_after(const_iterator, const_iterator);
       _Tp& front();
       const _Tp& front() const;
       void insert_after(const_iterator, const _Tp&);
@@ -72,7 +71,9 @@ namespace my_library {
   };
 
   template <class _Tp>
-  forward_list<_Tp>::forward_list() { m_pHead.m_pNext = nullptr; }
+  forward_list<_Tp>::forward_list() { 
+    m_pHead.m_pNext = nullptr; 
+  }
 
   template <class _Tp>
   forward_list<_Tp>::forward_list(size_t _num, const _Tp& _value)
@@ -102,12 +103,20 @@ namespace my_library {
   template <class _Tp>
   forward_list<_Tp>::forward_list(forward_list<_Tp>&& _forward_list)
       : m_pHead() {
-    *this = move(_forward_list);
+    *this = std::move(_forward_list);
     _forward_list.m_pHead.m_pNext = nullptr;
   }
 
   template <class _Tp>
-  forward_list<_Tp>::~forward_list() {}
+  forward_list<_Tp>::~forward_list() {
+    forward_list_node_base* _node = m_pHead.m_pNext;
+    while (_node != nullptr) {
+      forward_list_node_base* _temp = 
+        static_cast<forward_list_node<_Tp>*>(_node);
+      _node = _node->m_pNext;
+      delete _temp;
+    }
+  }
 
   template <class _Tp>
   void forward_list<_Tp>::assign(size_t _num, const _Tp& _value) {
@@ -181,13 +190,43 @@ namespace my_library {
   
   template <class _Tp>
   typename forward_list<_Tp>::iterator forward_list<_Tp>::end() NOEXCEPT {
-    return forward_list_iterator<_Tp>(static_cast<forward_list_node_base*>(nullptr));
+    return forward_list_iterator<_Tp>(
+      static_cast<forward_list_node_base*>(nullptr));
   }
 
   template <class _Tp>
   typename forward_list<_Tp>::const_iterator
   forward_list<_Tp>::end() const NOEXCEPT {
-    return forward_list_const_iterator<_Tp>(static_cast<forward_list_node_base*>(nullptr));
+    return forward_list_const_iterator<_Tp>(
+      static_cast<forward_list_node_base*>(nullptr));
+  }
+
+  template <class _Tp>
+  typename forward_list<_Tp>::iterator
+  forward_list<_Tp>::erase_after(const_iterator _position) {
+    forward_list_node<_Tp>* _temp =
+      static_cast<forward_list_node<_Tp>*>(_position.m_pNode->m_pNext);
+    _position.m_pNode->m_pNext = _temp->m_pNext;
+    delete _temp;
+    return forward_list_iterator<_Tp>(_position.m_pNode->m_pNext);
+  }
+  
+  template <class _Tp>
+  typename forward_list<_Tp>::iterator
+  forward_list<_Tp>::erase_after(const_iterator _first, const_iterator _last) {
+    forward_list_node<_Tp>* _node_first =
+      static_cast<forward_list_node<_Tp>*>(_first.m_pNode->m_pNext);
+    forward_list_node<_Tp>* _node_last =
+      static_cast<forward_list_node<_Tp>*>(_last.m_pNode);
+    for (; _node_first != _node_last;) {
+      forward_list_node<_Tp>* _temp =
+        static_cast<forward_list_node<_Tp>*>(_first.m_pNode->m_pNext);
+      _first.m_pNode->m_pNext = _temp->m_pNext;
+      delete _temp;
+      _node_first =
+        static_cast<forward_list_node<_Tp>*>(_first.m_pNode->m_pNext);
+    }
+    return forward_list_iterator<_Tp>(_first.m_pNode->m_pNext);
   }
 
   template <class _Tp>
@@ -211,7 +250,8 @@ namespace my_library {
   template <class _Tp>
   void forward_list<_Tp>::insert_after(const_iterator _position, 
       _Tp&& _value) {
-    forward_list_node<_Tp>* _node = new forward_list_node<_Tp>(move(_value));
+    forward_list_node<_Tp>* _node = 
+      new forward_list_node<_Tp>(std::move(_value));
     _node->m_pNext = _position.m_pNode->m_pNext;
     _position.m_pNode->m_pNext = _node;
   }
@@ -227,7 +267,8 @@ namespace my_library {
   void forward_list<_Tp>::insert_after(const_iterator _position,
       iterator _first, iterator _last) {
     for (; _first != _last; ++_position, ++_first) {
-      this->insert_after(_position, static_cast<forward_list_node<_Tp>*>(_first.m_pNode)->m_Value);
+      this->insert_after(_position, 
+        static_cast<forward_list_node<_Tp>*>(_first.m_pNode)->m_Value);
     }
   }
   
@@ -235,15 +276,17 @@ namespace my_library {
   void forward_list<_Tp>::insert_after(const_iterator _position,
     const_iterator _first, const_iterator _last) {
     for (; _first != _last; ++_position, ++_first) {
-      this->insert_after(_position, static_cast<forward_list_node<_Tp>*>(_first.m_pNode)->m_Value);
+      this->insert_after(_position, 
+        static_cast<forward_list_node<_Tp>*>(_first.m_pNode)->m_Value);
     }
   }
 
   template <class _Tp>
   forward_list<_Tp>& forward_list<_Tp>::operator=(
-      const forward_list<_Tp>& _forward_list) {
+      const forward_list<_Tp>& _forward_list) {  
     if (this != &_forward_list) {
-      this->assign(_forward_list.begin(), _forward_list.end());
+      forward_list<_Tp> _temp(_forward_list);
+      this->swap(_temp);
     }
     return *this;
   }
@@ -252,7 +295,7 @@ namespace my_library {
   forward_list<_Tp>& forward_list<_Tp>::operator=(
       forward_list<_Tp>&& _forward_list) {
     if (this != &_forward_list) {
-      m_pHead.m_pNext = move(_forward_list.m_pHead).m_pNext;
+      m_pHead.m_pNext = std::move(_forward_list.m_pHead).m_pNext;
       _forward_list.m_pHead.m_pNext = nullptr;
     }
     return *this;
@@ -272,7 +315,8 @@ namespace my_library {
 
   template <class _Tp>
   void forward_list<_Tp>::push_front(_Tp&& _value) {
-    forward_list_node<_Tp>* _node = new forward_list_node<_Tp>(move(_value));
+    forward_list_node<_Tp>* _node =
+      new forward_list_node<_Tp>(std::move(_value));
     _node->m_pNext = m_pHead.m_pNext;
     m_pHead.m_pNext = _node;
   }
@@ -292,7 +336,7 @@ namespace my_library {
 
   template <class _Tp>
   void forward_list<_Tp>::swap(forward_list<_Tp>& _forward_list) {
-    swap(this->m_pHead.m_pNext, _forward_list.m_pHead.m_pNext);
+    std::swap(this->m_pHead.m_pNext, _forward_list.m_pHead.m_pNext);
   }
 
 }
