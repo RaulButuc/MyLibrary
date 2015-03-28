@@ -2,7 +2,7 @@
  *  test_forward_list.cpp
  *
  *  @author Raul Butuc.
- *  @version 1.2.0 25/03/2015
+ *  @version 1.2.1 28/03/2015
  */
 
 #include <iostream>
@@ -122,6 +122,20 @@ void test_forward_list_two() {
   forward_list<char> copy_my_list(my_list.begin(), my_list.end());
 
   forward_list<char>::iterator copyIt = copy_my_list.begin();
+  cout << " o Printing the elements of copy_my_list: ";
+  for (; copyIt != copy_my_list.end(); ++copyIt) {
+    cout << *copyIt << " ";
+  }
+  cout << "\n";
+
+  cout << " - Set a const_iterator to the 1st element and last element in the list" << "\n";
+  forward_list<char>::const_iterator erasePosStart = copy_my_list.cbegin();
+  forward_list<char>::const_iterator erasePosEnd = copy_my_list.cend();
+
+  cout << " - Erase all the elements after the 1st one" << "\n";
+  copy_my_list.erase_after(erasePosStart, erasePosEnd);
+
+  copyIt = copy_my_list.begin();
   cout << " o Printing the elements of copy_my_list: ";
   for (; copyIt != copy_my_list.end(); ++copyIt) {
     cout << *copyIt << " ";
