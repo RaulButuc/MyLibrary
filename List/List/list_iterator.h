@@ -104,7 +104,7 @@ namespace my_library {
   template <class _Tp>
   typename list_iterator<_Tp>::pointer
   list_iterator<_Tp>::operator->() const {
-    return static_case<list_node<_Tp>*>(m_pNode);
+    return static_cast<list_node<_Tp>*>(m_pNode);
   }
 
   template <class _Tp>
