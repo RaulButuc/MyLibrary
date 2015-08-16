@@ -88,13 +88,13 @@ namespace my_library {
 
   template <class _Tp>
   bool forward_list_iterator<_Tp>::operator==(
-      const typename forward_list_iterator<_Tp>::iterator& _position) const {
+      const iterator& _position) const {
     return m_pNode == _position.m_pNode;
   }
 
   template <class _Tp>
   bool forward_list_iterator<_Tp>::operator!=(
-      const typename forward_list_iterator<_Tp>::iterator& _position) const {
+      const iterator& _position) const {
     return m_pNode != _position.m_pNode;
   }
 

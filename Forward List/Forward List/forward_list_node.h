@@ -25,6 +25,7 @@ namespace my_library {
       _Tp m_Value;
 
       forward_list_node(const _Tp&);
+
   };
 
   template <class _Tp>
