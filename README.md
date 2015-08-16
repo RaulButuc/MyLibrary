@@ -4,10 +4,10 @@ A personal and custom library that will eventually contain all the common data s
 ### Data structures included so far
 
 - Singly Linked List (Forward List)
+- Doubly Linked List (List)
 
 ### Coming soon
 
-- Doubly Linked List (List)
 - Stack
 - Queue
 - Double Ended Queue (Deque)
