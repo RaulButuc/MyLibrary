@@ -2,14 +2,13 @@
  *  test_forward_list.cpp
  *
  *  @author Raul Butuc.
- *  @version 1.2.1 28/03/2015
+ *  @version 1.3.0 17/08/2015
  */
 
 #include <iostream>
-#include <algorithm>
-#include <utility>
 #include <string>
 #include "forward_list.h"
+#include "UnitTest.h"
 
 using std::cout;
 using std::find;
@@ -23,7 +22,10 @@ void test_forward_list_four();
 
 forward_list<char> addOne(const forward_list<char>&);
 
+UnitTest test;
+
 int main(int argc, char* argv[]) {
+
   test_forward_list_one();
   test_forward_list_two();
   test_forward_list_three();
