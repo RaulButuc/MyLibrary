@@ -16,14 +16,14 @@
 #endif
 
 namespace my_library {
-    
-    class UNITTEST_API Assert {
+  
+  class UNITTEST_API Assert {
 
-        public:
-            static void That(bool, bool);
-            static void That(long, std::pair<char, long>);
-            static void That(std::string, std::pair<char, std::string>);
+    public:
+      static void That(bool, bool);
+      static void That(long, std::pair<char, long>);
+      static void That(std::string, std::pair<char, std::string>);
 
-    };
+  };
 
 }

@@ -18,17 +18,17 @@
 
 namespace my_library { 
 
-    class UNITTEST_API Is {
-        
-        public:
-            static std::pair<char, long> LessThan(long);
-            static std::pair<char, long> EqualTo(long);
-            static std::pair<char, long> GreaterThan(long);
-            static std::pair<char, std::string> EqualTo(std::string);
+  class UNITTEST_API Is {
+    
+    public:
+      static std::pair<char, long> LessThan(long);
+      static std::pair<char, long> EqualTo(long);
+      static std::pair<char, long> GreaterThan(long);
+      static std::pair<char, std::string> EqualTo(std::string);
 
-            static const bool False = false;
-            static const bool True = true;
+      static const bool False = false;
+      static const bool True = true;
 
-    };
+  };
 
 }
