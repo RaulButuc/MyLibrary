@@ -11,6 +11,7 @@ A personal and custom library that will eventually contain all the common data s
 - Stack
 - Queue
 - Double Ended Queue (Deque)
-- Set
-- Map
-- And many others to follow
+- Binary Search Tree
+- Red-Black Tree
+- AVL Tree
+- Graph
