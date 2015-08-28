@@ -2,18 +2,23 @@
  *  test_forward_list.cpp
  *
  *  @author Raul Butuc.
- *  @version 1.3.0 17/08/2015
+ *  @version 1.3.1 28/08/2015
  */
+
+// Not yet updated to make use of the custom unit test framework.
 
 #include <iostream>
 #include <string>
 #include "forward_list.h"
-#include "UnitTest.h"
+#include "Assert.h"
+#include "Is.h"
 
 using std::cout;
 using std::find;
 using std::string;
 using my_library::forward_list;
+using my_library::Assert;
+using my_library::Is;
 
 void test_forward_list_one();
 void test_forward_list_two();
@@ -22,10 +27,8 @@ void test_forward_list_four();
 
 forward_list<char> addOne(const forward_list<char>&);
 
-UnitTest test;
-
 int main(int argc, char* argv[]) {
-
+  
   test_forward_list_one();
   test_forward_list_two();
   test_forward_list_three();

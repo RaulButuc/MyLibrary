@@ -2,13 +2,11 @@
  *  forward_list_const_iterator.h
  *
  *  @author Raul Butuc.
- *  @version 1.2.0 26/03/2015
+ *  @version 1.2.1 28/08/2015
  */
 
 #pragma once
 
-#include <cassert>
-#include <iterator>
 #include "forward_list.h"
 #include "forward_list_node.h"
 
@@ -54,7 +52,7 @@ namespace my_library {
   template <class _Tp>
   const typename forward_list_const_iterator<_Tp>::const_iterator&
   forward_list_const_iterator<_Tp>::operator++() {
-    assert(m_pNode != nullptr);
+    if (m_pNode == nullptr) return static_cast<const const_iterator&>(nullptr);
     m_pNode = m_pNode->m_pNext;
     return *this;
   }
@@ -88,13 +86,13 @@ namespace my_library {
 
   template <class _Tp>
   bool forward_list_const_iterator<_Tp>::operator==(
-      const typename forward_list_const_iterator<_Tp>::const_iterator& _position) const {
+      const const_iterator& _position) const {
     return m_pNode == _position.m_pNode;
   }
 
   template <class _Tp>
   bool forward_list_const_iterator<_Tp>::operator!=(
-      const typename forward_list_const_iterator<_Tp>::const_iterator& _position) const {
+      const const_iterator& _position) const {
     return m_pNode != _position.m_pNode;
   }
 
