@@ -15,20 +15,16 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="list_node_base.h">
+    <ClInclude Include="binary_search_tree.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="list_node.h">
+    <ClInclude Include="binary_tree_node.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="list_iterator.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="list_const_iterator.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="list.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="test_binary_search_tree.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
