@@ -25,6 +25,7 @@ namespace my_library {
       void insert(_Tp);
       void insert(std::vector<_Tp>);
       void remove(_Tp);
+      void remove(std::vector<_Tp>);
       bool search(_Tp);
       ~binary_search_tree();
 
@@ -127,8 +128,8 @@ namespace my_library {
   }
 
   template <class _Tp>
-  binary_tree_node<_Tp>* binary_search_tree<_Tp>::getNodeByValue(
-      binary_tree_node<_Tp>* curr, _Tp val){
+  binary_tree_node<_Tp>* binary_search_tree<_Tp>::getNodeByValue(binary_tree_node<_Tp>* curr,
+      _Tp val){
     if (curr != nullptr) {
       if (curr->value == val) {
         return curr;
@@ -167,15 +168,15 @@ namespace my_library {
     while (!vals.empty()) {
       _Tp val = vals.back();
       vals.pop_back();
-
       this->insert(&m_pHead, nullptr, val, false);
     }
   }
 
   template <class _Tp>
-  void binary_search_tree<_Tp>::insert(binary_tree_node<_Tp>** curr, binary_tree_node<_Tp>* parent, _Tp val, bool isLeftChild) {
+  void binary_search_tree<_Tp>::insert(binary_tree_node<_Tp>** curr, binary_tree_node<_Tp>* parent,
+      _Tp val, bool isLeftChild) {
     if (*curr == nullptr) {
-      (*curr) = new binary_tree_node<_Tp>();
+      *curr = new binary_tree_node<_Tp>();
       (*curr)->value = val;
 
       if (parent != nullptr) {
@@ -201,6 +202,20 @@ namespace my_library {
   void binary_search_tree<_Tp>::remove(_Tp val) {
     if (m_pHead != nullptr) {
       binary_tree_node<_Tp>* node = this->remove(m_pHead, val);
+    }
+  }
+
+  template <class _Tp>
+  void binary_search_tree<_Tp>::remove(std::vector<_Tp> vals) {
+    if (m_pHead != nullptr) {
+      binary_tree_node<_Tp>* node;
+      vals = std::vector<_Tp>(vals.rbegin(), vals.rend());
+      
+      while (!vals.empty()) {
+        _Tp val = vals.back();
+        vals.pop_back();
+        node = this->remove(m_pHead, val);
+      }
     }
   }
 
