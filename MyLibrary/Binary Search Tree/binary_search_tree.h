@@ -2,7 +2,7 @@
  *  binary_search_tree.h
  *
  *  @author Raul Butuc.
- *  @version 1.0.0 14/10/2015
+ *  @version 1.0.1 01/11/2015
  */
 
 #pragma once
