@@ -5,13 +5,13 @@ A personal and custom library that will eventually contain all the common data s
 
 - Singly Linked List (Forward List)
 - Doubly Linked List (List)
+- Binary Search Tree
 
 ### Coming soon
 
 - Stack
 - Queue
 - Double Ended Queue (Deque)
-- Binary Search Tree
 - Red-Black Tree
 - AVL Tree
 - Graph
