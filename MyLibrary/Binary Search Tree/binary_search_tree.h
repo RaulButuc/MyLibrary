@@ -2,7 +2,7 @@
  *  binary_search_tree.h
  *
  *  @author Raul Butuc.
- *  @version 1.0.1 01/11/2015
+ *  @version 1.0.2 02/11/2015
  */
 
 #pragma once
@@ -18,9 +18,9 @@ namespace my_library {
 
     public:
       binary_search_tree();
-      void displayPreOrder();
-      void displayInOrder();
-      void displayPostOrder();
+      void display_pre_order();
+      void display_in_order();
+      void display_post_order();
       bool empty();
       void insert(_Tp);
       void insert(std::vector<_Tp>);
@@ -32,13 +32,13 @@ namespace my_library {
     private:
       binary_tree_node<_Tp>* m_pHead;
 
-      void displayPreOrder(binary_tree_node<_Tp>*);
-      void displayInOrder(binary_tree_node<_Tp>*);
-      void displayPostOrder(binary_tree_node<_Tp>*);
-      void displayNode(binary_tree_node<_Tp>*);
-      binary_tree_node<_Tp>* getMinValueNode(binary_tree_node<_Tp>*);
-      binary_tree_node<_Tp>* getNodeByValue(binary_tree_node<_Tp>*, _Tp);
-      void getNodesInPostOrder(binary_tree_node<_Tp>*, std::queue<binary_tree_node<_Tp>*>&);
+      void display_pre_order(binary_tree_node<_Tp>*);
+      void display_in_order(binary_tree_node<_Tp>*);
+      void display_post_order(binary_tree_node<_Tp>*);
+      void display_node(binary_tree_node<_Tp>*);
+      binary_tree_node<_Tp>* get_min_value_node(binary_tree_node<_Tp>*);
+      binary_tree_node<_Tp>* get_node_by_value(binary_tree_node<_Tp>*, _Tp);
+      void get_nodes_in_post_order(binary_tree_node<_Tp>*, std::queue<binary_tree_node<_Tp>*>&);
       void insert(binary_tree_node<_Tp>**, binary_tree_node<_Tp>*, _Tp, bool);
       binary_tree_node<_Tp>* remove(binary_tree_node<_Tp>*, _Tp);
       bool search(binary_tree_node<_Tp>*, _Tp);
@@ -49,67 +49,67 @@ namespace my_library {
   binary_search_tree<_Tp>::binary_search_tree() : m_pHead(nullptr) {}
 
   template <class _Tp>
-  void binary_search_tree<_Tp>::displayPreOrder() {
+  void binary_search_tree<_Tp>::display_pre_order() {
     if (m_pHead != nullptr) {
-      this->displayPreOrder(m_pHead);
+      this->display_pre_order(m_pHead);
     }
   }
 
   template <class _Tp>
-  void binary_search_tree<_Tp>::displayPreOrder(binary_tree_node<_Tp>* curr) {
-    this->displayNode(curr);
+  void binary_search_tree<_Tp>::display_pre_order(binary_tree_node<_Tp>* curr) {
+    this->display_node(curr);
   
     if (curr->left != nullptr) {
-      this->displayPreOrder(curr->left);
+      this->display_pre_order(curr->left);
     }
 
     if (curr->right != nullptr) {
-      this->displayPreOrder(curr->right);
+      this->display_pre_order(curr->right);
     }
   }
 
   template <class _Tp>
-  void binary_search_tree<_Tp>::displayInOrder() {
+  void binary_search_tree<_Tp>::display_in_order() {
     if (m_pHead != nullptr) {
-      this->displayInOrder(m_pHead);
+      this->display_in_order(m_pHead);
     }
   }
 
   template <class _Tp>
-  void binary_search_tree<_Tp>::displayInOrder(binary_tree_node<_Tp>* curr) {
+  void binary_search_tree<_Tp>::display_in_order(binary_tree_node<_Tp>* curr) {
     if (curr->left != nullptr) {
-      this->displayInOrder(curr->left);
+      this->display_in_order(curr->left);
     }
 
-    this->displayNode(curr);
+    this->display_node(curr);
 
     if (curr->right != nullptr) {
-      this->displayInOrder(curr->right);
+      this->display_in_order(curr->right);
     }
   }
 
   template <class _Tp>
-  void binary_search_tree<_Tp>::displayPostOrder() {
+  void binary_search_tree<_Tp>::display_post_order() {
     if (m_pHead != nullptr) {
-      this->displayPostOrder(m_pHead);
+      this->display_post_order(m_pHead);
     }
   }
 
   template <class _Tp>
-  void binary_search_tree<_Tp>::displayPostOrder(binary_tree_node<_Tp>* curr) {
+  void binary_search_tree<_Tp>::display_post_order(binary_tree_node<_Tp>* curr) {
     if (curr->left != nullptr) {
-      this->displayPostOrder(curr->left);
+      this->display_post_order(curr->left);
     }
 
     if (curr->right != nullptr) {
-      this->displayPostOrder(curr->right);
+      this->display_post_order(curr->right);
     }
 
-    this->displayNode(curr);
+    this->display_node(curr);
   }
 
   template <class _Tp>
-  void binary_search_tree<_Tp>::displayNode(binary_tree_node<_Tp>* curr) {
+  void binary_search_tree<_Tp>::display_node(binary_tree_node<_Tp>* curr) {
     std::cout << curr->value << " ";
   }
 
@@ -119,7 +119,7 @@ namespace my_library {
   }
 
   template <class _Tp>
-  binary_tree_node<_Tp>* binary_search_tree<_Tp>::getMinValueNode(binary_tree_node<_Tp>* curr) {
+  binary_tree_node<_Tp>* binary_search_tree<_Tp>::get_min_value_node(binary_tree_node<_Tp>* curr) {
     while (curr->left != nullptr) {
       curr = curr->left;
     }
@@ -128,7 +128,7 @@ namespace my_library {
   }
 
   template <class _Tp>
-  binary_tree_node<_Tp>* binary_search_tree<_Tp>::getNodeByValue(binary_tree_node<_Tp>* curr,
+  binary_tree_node<_Tp>* binary_search_tree<_Tp>::get_node_by_value(binary_tree_node<_Tp>* curr,
       _Tp val){
     if (curr != nullptr) {
       if (curr->value == val) {
@@ -147,11 +147,11 @@ namespace my_library {
   }
 
   template <class _Tp>
-  void binary_search_tree<_Tp>::getNodesInPostOrder(binary_tree_node<_Tp>* curr,
+  void binary_search_tree<_Tp>::get_nodes_in_post_order(binary_tree_node<_Tp>* curr,
       std::queue<binary_tree_node<_Tp>*>& nodes) {
     if (curr != nullptr) {
-      this->getNodesInPostOrder(curr->left, nodes);
-      this->getNodesInPostOrder(curr->right, nodes);
+      this->get_nodes_in_post_order(curr->left, nodes);
+      this->get_nodes_in_post_order(curr->right, nodes);
       nodes.push(curr);
     }
   }
@@ -247,7 +247,7 @@ namespace my_library {
         delete temp;
       }
       else {
-        binary_tree_node<_Tp>* temp = this->getMinValueNode(curr->right);
+        binary_tree_node<_Tp>* temp = this->get_min_value_node(curr->right);
         curr->value = temp->value;
         curr->right = this->remove(curr->right, temp->value);
       }
@@ -283,7 +283,7 @@ namespace my_library {
   binary_search_tree<_Tp>::~binary_search_tree() {
     std::queue<binary_tree_node<_Tp>*> nodes;
     
-    this->getNodesInPostOrder(m_pHead, nodes);
+    this->get_nodes_in_post_order(m_pHead, nodes);
     
     while (!nodes.empty()) {
       binary_tree_node<_Tp>* node = nodes.front();

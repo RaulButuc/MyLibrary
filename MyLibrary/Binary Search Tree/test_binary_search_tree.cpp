@@ -2,7 +2,7 @@
  *  test_binary_search_tree.cpp
  *
  *  @author Raul Butuc.
- *  @version 1.0.1 01/11/2015
+ *  @version 1.0.2 02/11/2015
  */
 
 // TODO: Update the Assert and Is classes for better custom data structures support.
@@ -14,36 +14,36 @@
 
 template <class _Tp> class binary_search_tree;
 
-void printTree(my_library::binary_search_tree<int>*);
+void print_tree(my_library::binary_search_tree<int>*);
 
 int main(int argc, char* argv[]) {
   my_library::binary_search_tree<int> tree;
-  std::vector<int> setOneValues = { 20, 17, 19, 15 };
-  std::vector<int> setTwoValues = { 11, 8, 14 };
+  std::vector<int> set_one = { 20, 17, 19, 15 };
+  std::vector<int> set_two = { 11, 8, 14 };
 
   tree.insert(10);
   tree.insert(8);
   tree.insert(9);
   tree.insert(5);
   tree.insert(14);
-  tree.insert(setOneValues);
+  tree.insert(set_one);
 
-  printTree(&tree);
+  print_tree(&tree);
 
-  tree.remove(setTwoValues);
+  tree.remove(set_two);
 
-  printTree(&tree);
+  print_tree(&tree);
 
   system("pause");
 
   return 0;
 }
 
-void printTree(my_library::binary_search_tree<int>* tree) {
-  tree->displayPreOrder();
+void print_tree(my_library::binary_search_tree<int>* tree) {
+  tree->display_pre_order();
   std::cout << "\n";
-  tree->displayInOrder();
+  tree->display_in_order();
   std::cout << "\n";
-  tree->displayPostOrder();
+  tree->display_post_order();
   std::cout << "\n";
 }

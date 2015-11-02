@@ -9,10 +9,10 @@
 
 #include "binary_search_tree.h"
 
-template <class _Tp> class binary_search_tree;
-
 namespace my_library {
   
+  template <class _Tp> class binary_search_tree;
+
   template <class _Tp>
   class binary_tree_node {
 
