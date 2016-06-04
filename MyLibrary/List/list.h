@@ -13,9 +13,9 @@
 #include "list_const_iterator.h"
 
 #ifndef _MSC_VER
-#define NOEXCEPT noexcept
+#define NOEXCEPT  noexcept
 #else
-#define NOEXCEPT
+#define NOEXCEPT 
 #endif
 
 namespace my_library {
@@ -40,19 +40,19 @@ namespace my_library {
       void assign(const_iterator, const_iterator);
       _Tp& back();
       const _Tp& back() const;
-      iterator before_begin() NOEXCEPT;
-      const_iterator before_begin() const NOEXCEPT;
-      iterator before_end() NOEXCEPT;
-      const_iterator before_end() const NOEXCEPT;
-      iterator begin() NOEXCEPT;
-      const_iterator begin() const NOEXCEPT;
-      const_iterator cbefore_begin() NOEXCEPT;
-      const_iterator cbegin() const NOEXCEPT;
-      const_iterator cend() const NOEXCEPT;
-      void clear() NOEXCEPT;
-      bool empty() const NOEXCEPT;
-      iterator end() NOEXCEPT;
-      const_iterator end() const NOEXCEPT;
+      iterator before_begin() NOEXCEPT ;
+      const_iterator before_begin() const NOEXCEPT ;
+      iterator before_end() NOEXCEPT ;
+      const_iterator before_end() const NOEXCEPT ;
+      iterator begin() NOEXCEPT ;
+      const_iterator begin() const NOEXCEPT ;
+      const_iterator cbefore_begin() NOEXCEPT ;
+      const_iterator cbegin() const NOEXCEPT ;
+      const_iterator cend() const NOEXCEPT ;
+      void clear() NOEXCEPT ;
+      bool empty() const NOEXCEPT ;
+      iterator end() NOEXCEPT ;
+      const_iterator end() const NOEXCEPT ;
       iterator erase_after(const_iterator);
       iterator erase_after(const_iterator, const_iterator);
       iterator erase_before(const_iterator);
@@ -77,7 +77,8 @@ namespace my_library {
       void push_back(_Tp&&);
       void push_front(const _Tp&);
       void push_front(_Tp&&);
-      void reverse() NOEXCEPT;
+      void remove(const _Tp&);
+      void reverse() NOEXCEPT ;
       void swap(list<_Tp>&);
 
     private:
@@ -163,77 +164,77 @@ namespace my_library {
 
   template <class _Tp>
   typename list<_Tp>::iterator
-    list<_Tp>::before_begin() NOEXCEPT{
+    list<_Tp>::before_begin() NOEXCEPT {
     return list_iterator<_Tp>(&m_pHead);
   }
 
     template <class _Tp>
   typename list<_Tp>::const_iterator
-    list<_Tp>::before_begin() const NOEXCEPT{
+    list<_Tp>::before_begin() const NOEXCEPT {
     return list_const_iterator<_Tp>(&m_pHead);
   }
 
   template <class _Tp>
   typename list<_Tp>::iterator
-    list<_Tp>::before_end() NOEXCEPT{
+    list<_Tp>::before_end() NOEXCEPT {
     return list_iterator<_Tp>(&m_pTail);
   }
 
   template <class _Tp>
   typename list<_Tp>::const_iterator
-    list<_Tp>::before_end() const NOEXCEPT{
+    list<_Tp>::before_end() const NOEXCEPT {
     return list_const_iterator<_Tp>(&m_pTail);
   }
 
     template <class _Tp>
-  typename list<_Tp>::iterator list<_Tp>::begin() NOEXCEPT{
+  typename list<_Tp>::iterator list<_Tp>::begin() NOEXCEPT {
     return list_iterator<_Tp>(m_pHead.m_pNext);
   }
 
     template <class _Tp>
   typename list<_Tp>::const_iterator
-    list<_Tp>::begin() const NOEXCEPT{
+    list<_Tp>::begin() const NOEXCEPT {
     return list_const_iterator<_Tp>(m_pHead.m_pNext);
   }
 
     template <class _Tp>
   typename list<_Tp>::const_iterator
-    list<_Tp>::cbefore_begin() NOEXCEPT{
+    list<_Tp>::cbefore_begin() NOEXCEPT {
     return list_const_iterator<_Tp>(&m_pHead);
   }
 
     template <class _Tp>
   typename list<_Tp>::const_iterator
-    list<_Tp>::cbegin() const NOEXCEPT{
+    list<_Tp>::cbegin() const NOEXCEPT {
     return list_const_iterator<_Tp>(m_pHead.m_pNext);
   }
 
     template <class _Tp>
   typename list<_Tp>::const_iterator
-    list<_Tp>::cend() const NOEXCEPT{
+    list<_Tp>::cend() const NOEXCEPT {
     return list_const_iterator<_Tp>(nullptr);
   }
 
     template <class _Tp>
-  void list<_Tp>::clear() NOEXCEPT{
+  void list<_Tp>::clear() NOEXCEPT {
     while (!this->empty())
     this->pop_front();
   }
 
     template <class _Tp>
-  bool list<_Tp>::empty() const NOEXCEPT{
+  bool list<_Tp>::empty() const NOEXCEPT {
     return m_pHead.m_pNext == nullptr;
   }
 
     template <class _Tp>
-  typename list<_Tp>::iterator list<_Tp>::end() NOEXCEPT{
+  typename list<_Tp>::iterator list<_Tp>::end() NOEXCEPT {
     return list_iterator<_Tp>(
     static_cast<list_node_base*>(nullptr));
   }
 
     template <class _Tp>
   typename list<_Tp>::const_iterator
-    list<_Tp>::end() const NOEXCEPT{
+    list<_Tp>::end() const NOEXCEPT {
     return list_const_iterator<_Tp>(
     static_cast<list_node_base*>(nullptr));
   }
@@ -405,7 +406,21 @@ namespace my_library {
   }
 
   template <class _Tp>
-  void list<_Tp>::reverse() NOEXCEPT{
+  void list<_Tp>::remove(const _Tp& _value) {
+    list_node<_Tp>* _node = m_pHead.m_pNext;
+
+    do {
+      if (_node->m_Value == _value) {
+        _node->m_pPrev->m_pNext = _node->m_pNext;
+        break;
+      }
+
+      _node = _node->m_pNext;
+    } while(_node != nullptr);
+  }
+
+  template <class _Tp>
+  void list<_Tp>::reverse() NOEXCEPT {
     list_node_base* _tail = m_pHead.m_pNext;
     if (!_tail)
       return;

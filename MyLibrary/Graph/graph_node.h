@@ -124,28 +124,32 @@ namespace my_library {
   }
 
   template <class _Tp>
-  void graph_node<_Tp>::removeNeighbour(const _Tp&) {
-    
+  void graph_node<_Tp>::removeNeighbour(const _Tp& _value) {
+    neighbours.remove(graph_node(_value));
   }
 
   template <class _Tp>
-  void graph_node<_Tp>::removeNeighbour(const graph_node&) {
-
+  void graph_node<_Tp>::removeNeighbour(const graph_node& _node) {
+    neighbours.remove(_node);
   }
 
   template <class _Tp>
-  void graph_node<_Tp>::removeNeighbours(const list<_Tp>&) {
-
+  void graph_node<_Tp>::removeNeighbours(const list<_Tp>& _neighbours) {
+    for (auto it = _neighbours.begin(); it != _neighbours.end(); ++it) {
+      neighbours.remove(graph_node(*it));
+    }
   }
 
   template <class _Tp>
-  void graph_node<_Tp>::removeNeighbours(const list<graph_node>&) {
-
+  void graph_node<_Tp>::removeNeighbours(const list<graph_node>& _neighbours) {
+    for (auto it = _neighbours.begin(); it != _neighbours.end(); ++it) {
+      neighbours.remove(*it);
+    }
   }
 
   template <class _Tp>
   void graph_node<_Tp>::removeAllNeighbours() {
-
+    neighbours.clear();
   }
 
   template <class _Tp>
