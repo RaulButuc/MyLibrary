@@ -256,7 +256,7 @@ namespace my_library {
       static_cast<list_node<_Tp>*>(_first.m_pNode->m_pNext);
     list_node<_Tp>* _node_last =
       static_cast<list_node<_Tp>*>(_last.m_pNode);
-    for (; _node_first != _node_last;) {
+    while (_node_first != _node_last) {
       list_node<_Tp>* _temp =
         static_cast<list_node<_Tp>*>(_first.m_pNode->m_pNext);
       _first.m_pNode->m_pNext = _temp->m_pNext;
