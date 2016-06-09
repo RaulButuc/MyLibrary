@@ -21,5 +21,8 @@
     <ClInclude Include="graph_node.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="graph_type.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

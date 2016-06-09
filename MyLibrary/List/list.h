@@ -377,7 +377,7 @@ namespace my_library {
 
   template <class _Tp>
   list<_Tp>& list<_Tp>::operator=(
-    list<_Tp>&& _list) {
+      list<_Tp>&& _list) {
     if (this != &_list) {
       m_pHead.m_pNext = std::move(_list.m_pHead).m_pNext;
       _list.m_pHead.m_pNext = nullptr;

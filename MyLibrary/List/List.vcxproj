@@ -17,6 +17,9 @@
     <ClInclude Include="list_node.h" />
     <ClInclude Include="list_node_base.h" />
   </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="test_list.cpp" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{4C8CB3C8-3289-4472-A842-F942DE01A3D1}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
@@ -64,6 +67,7 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>D:\Programming\Git\MyLibrary\MyLibrary\Debug\UnitTest.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
