@@ -1,13 +1,19 @@
 /**
- *  graph_node.h
- *
- *  @author Raul Butuc.
- *  @version 1.0.0 04/06/2016
- */
+*  graph_node.h
+*
+*  @author Raul Butuc
+*  @version 1.0.1 14/03/2017
+*/
 
 #pragma once
 
 #include "list.h"
+
+#ifndef _MSC_VER
+#define NOEXCEPT  noexcept
+#else
+#define NOEXCEPT 
+#endif
 
 namespace my_library {
 
@@ -15,27 +21,29 @@ namespace my_library {
   class graph_node {
 
     public:
+
       graph_node();
-      graph_node(const _Tp&);
-      graph_node(const graph_node&);
-      graph_node(const _Tp&, const list<_Tp>&);
-      graph_node(const graph_node&, const list<_Tp>&);
-      graph_node(const _Tp&, const list<graph_node>&);
-      graph_node(const graph_node&, const list<graph_node>&);
-      void setValue(const _Tp&);
-      _Tp getValue(); 
-      void addNeighbour(const _Tp&);
-      void addNeighbour(const graph_node&);
-      void addNeighbours(const list<_Tp>&);
-      void addNeighbours(const list<graph_node>&);
-      void removeNeighbour(const _Tp&);
-      void removeNeighbour(const graph_node&);
-      void removeNeighbours(const list<_Tp>&);
-      void removeNeighbours(const list<graph_node>&);
-      void removeAllNeighbours();
-      list<graph_node> getNeighbours();
+      graph_node(_Tp const&);
+      graph_node(graph_node const&);
+      graph_node(_Tp const&, list<_Tp> const&);
+      graph_node(graph_node const&, list<_Tp> const&);
+      graph_node(_Tp const&, list<graph_node> const&);
+      graph_node(graph_node const&, list<graph_node> const&);
+      auto setValue(_Tp const&) -> void;
+      auto getValue() const->_Tp;
+      auto addNeighbour(_Tp const&) -> void;
+      auto addNeighbour(graph_node const&) -> void;
+      auto addNeighbours(list<_Tp> const&) -> void;
+      auto addNeighbours(list<graph_node> const&) -> void;
+      auto removeNeighbour(_Tp const&) -> void;
+      auto removeNeighbour(graph_node const&) -> void;
+      auto removeNeighbours(list<_Tp> const&) -> void;
+      auto removeNeighbours(list<graph_node> const&) -> void;
+      auto removeAllNeighbours() -> void;
+      auto getNeighbours()->list<graph_node>;
 
     private:
+
       _Tp value;
       list<graph_node> neighbours;
 
@@ -45,14 +53,14 @@ namespace my_library {
   graph_node<_Tp>::graph_node() { }
 
   template <class _Tp>
-  graph_node<_Tp>::graph_node(const _Tp& _value) : value(_value) { }
+  graph_node<_Tp>::graph_node(_Tp const& _value) : value(_value) { }
 
   template <class _Tp>
-  graph_node<_Tp>::graph_node(const graph_node& _node) : value(_node.getValue()) { }
+  graph_node<_Tp>::graph_node(graph_node const& _node) : value(_node.getValue()) { }
 
   template <class _Tp>
-  graph_node<_Tp>::graph_node(const _Tp& _value, const list<_Tp>& _neighbours)
-      : value(_value) {
+  graph_node<_Tp>::graph_node(_Tp const& _value, list<_Tp> const& _neighbours)
+    : value(_value) {
     for (auto it = _neighbours.begin(); it != _neighbours.end(); ++it) {
       graph_node newNeighbour = graph_node(*it);
       neighbours.push_back(newNeighbour);
@@ -60,8 +68,8 @@ namespace my_library {
   }
 
   template <class _Tp>
-  graph_node<_Tp>::graph_node(const graph_node& _node, const list<_Tp>& _neighbours)
-      : value(_node.getValue()) {
+  graph_node<_Tp>::graph_node(graph_node const& _node, list<_Tp> const& _neighbours)
+    : value(_node.getValue()) {
     for (auto it = _neighbours.begin(); it != _neighbours.end(); ++it) {
       graph_node newNeighbour = graph_node(*it);
       neighbours.push_back(newNeighbour);
@@ -69,8 +77,8 @@ namespace my_library {
   }
 
   template <class _Tp>
-  graph_node<_Tp>::graph_node(const _Tp& _value, const list<graph_node>& _neighbours)
-      : value(_value) {
+  graph_node<_Tp>::graph_node(_Tp const& _value, list<graph_node> const& _neighbours)
+    : value(_value) {
     for (auto it = _neighbours.begin(); it != _neighbours.end(); ++it) {
       graph_node newNeighbour = graph_node(*it);
       neighbours.push_back(newNeighbour);
@@ -78,8 +86,8 @@ namespace my_library {
   }
 
   template <class _Tp>
-  graph_node<_Tp>::graph_node(const graph_node& _node, const list<graph_node>& _neighbours)
-      : value(_node.getValue()) {
+  graph_node<_Tp>::graph_node(graph_node const& _node, list<graph_node> const& _neighbours)
+    : value(_node.getValue()) {
     for (auto it = _neighbours.begin(); it != _neighbours.end(); ++it) {
       graph_node newNeighbour = graph_node(*it);
       neighbours.push_back(newNeighbour);
@@ -87,28 +95,28 @@ namespace my_library {
   }
 
   template <class _Tp>
-  void graph_node<_Tp>::setValue(const _Tp& _value) {
+  auto graph_node<_Tp>::setValue(_Tp const& _value) -> void {
     value = _value;
   }
 
   template <class _Tp>
-  _Tp graph_node<_Tp>::getValue() {
+  auto graph_node<_Tp>::getValue() const -> _Tp {
     return value;
   }
 
   template <class _Tp>
-  void graph_node<_Tp>::addNeighbour(const _Tp& _value) {
+  auto graph_node<_Tp>::addNeighbour(_Tp const& _value) -> void {
     graph_node newNeighbour = graph_node(_value);
     neighbours.push_back(newNeighbour);
   }
 
   template <class _Tp>
-  void graph_node<_Tp>::addNeighbour(const graph_node& _node) {
+  auto graph_node<_Tp>::addNeighbour(graph_node const& _node) -> void {
     neighbours.push_back(_node);
   }
 
   template <class _Tp>
-  void graph_node<_Tp>::addNeighbours(const list<_Tp>& _neighbours) {
+  auto graph_node<_Tp>::addNeighbours(list<_Tp> const& _neighbours) -> void {
     for (auto it = _neighbours.begin(); it != _neighbours.end(); ++it) {
       graph_node newNeighbour = graph_node(*it);
       neighbours.push_back(newNeighbour);
@@ -116,7 +124,7 @@ namespace my_library {
   }
 
   template <class _Tp>
-  void graph_node<_Tp>::addNeighbours(const list<graph_node>& _neighbours) {
+  auto graph_node<_Tp>::addNeighbours(list<graph_node> const& _neighbours) -> void {
     for (auto it = _neighbours.begin(); it != _neighbours.end(); ++it) {
       graph_node newNeighbour = graph_node(*it);
       neighbours.push_back(newNeighbour);
@@ -124,36 +132,36 @@ namespace my_library {
   }
 
   template <class _Tp>
-  void graph_node<_Tp>::removeNeighbour(const _Tp& _value) {
+  auto graph_node<_Tp>::removeNeighbour(_Tp const& _value) -> void {
     neighbours.remove(graph_node(_value));
   }
 
   template <class _Tp>
-  void graph_node<_Tp>::removeNeighbour(const graph_node& _node) {
+  auto graph_node<_Tp>::removeNeighbour(graph_node const& _node) -> void {
     neighbours.remove(_node);
   }
 
   template <class _Tp>
-  void graph_node<_Tp>::removeNeighbours(const list<_Tp>& _neighbours) {
+  auto graph_node<_Tp>::removeNeighbours(list<_Tp> const& _neighbours) -> void {
     for (auto it = _neighbours.begin(); it != _neighbours.end(); ++it) {
       neighbours.remove(graph_node(*it));
     }
   }
 
   template <class _Tp>
-  void graph_node<_Tp>::removeNeighbours(const list<graph_node>& _neighbours) {
-    for (auto it = _neighbours.begin(); it != _neighbours.end(); ++it) {
+  auto graph_node<_Tp>::removeNeighbours(list<graph_node> const& _neighbours) {
+    for (auto it = _neighbours.begin(); it != _neighbours.end(); ++it) -> void {
       neighbours.remove(*it);
     }
   }
 
   template <class _Tp>
-  void graph_node<_Tp>::removeAllNeighbours() {
+  auto graph_node<_Tp>::removeAllNeighbours() -> void {
     neighbours.clear();
   }
 
   template <class _Tp>
-  list<graph_node> graph_node<_Tp>::getNeighbours() {
+  auto graph_node<_Tp>::getNeighbours() -> list<graph_node> {
     return neighbours;
   }
 
