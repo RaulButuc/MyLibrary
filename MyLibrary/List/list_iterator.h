@@ -1,8 +1,8 @@
 /**
  *  list_iterator.h
  *
- *  @author Raul Butuc.
- *  @version 1.0.0 16/08/2015
+ *  @author Raul Butuc
+ *  @version 1.0.1 14/03/2017
  */
 
 #pragma once
@@ -19,6 +19,7 @@ namespace my_library {
   class list_iterator {
     
     public:
+
       typedef list_iterator<_Tp> iterator;
       typedef size_t size_type;
       typedef _Tp value_type;
@@ -27,18 +28,19 @@ namespace my_library {
       typedef std::forward_iterator_tag iterator_category;
       typedef size_t difference_type;
 
-      const iterator& operator++();
-      const iterator& operator++(int);
-      const iterator& operator+=(int);
-      const iterator& operator--();
-      const iterator& operator--(int);
-      const iterator& operator-=(int);
-      reference operator*() const;
-      pointer operator->() const;
-      bool operator==(const iterator&) const;
-      bool operator!=(const iterator&) const;
+      auto operator++() -> iterator const&;
+      auto operator++(int) -> iterator const&;
+      auto operator+=(int) -> iterator const&;
+      auto operator--() -> iterator const&;
+      auto operator--(int) -> iterator const&;
+      auto operator-=(int) -> iterator const&;
+      auto operator*() const -> reference;
+      auto operator->() const -> pointer;
+      auto operator==(iterator const&) const -> bool;
+      auto operator!=(iterator const&) const -> bool;
 
       private:
+
         list_node_base* m_pNode;
 
         list_iterator(list_node_base*);
@@ -50,72 +52,72 @@ namespace my_library {
     : m_pNode(_node) {}
 
   template <class _Tp>
-  const typename list_iterator<_Tp>::iterator&
-  list_iterator<_Tp>::operator++() {
+  auto list_iterator<_Tp>::operator++()
+      -> typename list_iterator<_Tp>::iterator const& {
     assert(m_pNode != nullptr);
     m_pNode = m_pNode->m_pNext;
     return *this;
   }
 
   template <class _Tp>
-  const typename list_iterator<_Tp>::iterator&
-  list_iterator<_Tp>::operator++(int) {
+  auto list_iterator<_Tp>::operator++(int)
+      -> typename list_iterator<_Tp>::iterator const& {
     list_iterator<_Tp> _temp(*this);
     ++(*this);
     return _temp;
   }
 
   template <class _Tp>
-  const typename list_iterator<_Tp>::iterator&
-  list_iterator<_Tp>::operator+=(int _num) {
+  auto list_iterator<_Tp>::operator+=(int _num)
+      -> typename list_iterator<_Tp>::iterator const&{
     for (int i = 0; i < _num; ++i, ++(*this));
     return *this;
   }
 
   template <class _Tp>
-  const typename list_iterator<_Tp>::iterator&
-  list_iterator<_Tp>::operator--() {
+  auto list_iterator<_Tp>::operator--()
+      -> typename list_iterator<_Tp>::iterator const& {
     assert(m_pNode != nullptr);
     m_pNode = m_pNode->m_pPrev;
     return *this;
   }
 
   template <class _Tp>
-  const typename list_iterator<_Tp>::iterator&
-  list_iterator<_Tp>::operator--(int) {
+  auto list_iterator<_Tp>::operator--(int)
+      -> typename list_iterator<_Tp>::iterator const& {
     list_iterator<_Tp> _temp(*this);
     --(*this);
     return _temp;
   }
 
   template <class _Tp>
-  const typename list_iterator<_Tp>::iterator&
-  list_iterator<_Tp>::operator-=(int _num) {
+  auto list_iterator<_Tp>::operator-=(int _num)
+      -> typename list_iterator<_Tp>::iterator const& {
     for (int i = 0; i < _num; ++i, --(*this));
     return *this;
   }
 
   template <class _Tp>
-  typename list_iterator<_Tp>::reference
-  list_iterator<_Tp>::operator*() const {
+  auto list_iterator<_Tp>::operator*() const
+      -> typename list_iterator<_Tp>::reference {
     return static_cast<list_node<_Tp>*>(m_pNode)->m_Value;
   }
 
   template <class _Tp>
-  typename list_iterator<_Tp>::pointer
-  list_iterator<_Tp>::operator->() const {
+  auto list_iterator<_Tp>::operator->() const
+      -> typename list_iterator<_Tp>::pointer {
     return static_cast<list_node<_Tp>*>(m_pNode);
   }
 
   template <class _Tp>
-  bool list_iterator<_Tp>::operator==(
-      const iterator& _position) const {
+  auto list_iterator<_Tp>::operator==(
+      iterator const& _position) const -> bool {
     return m_pNode == _position.m_pNode;
   }
 
   template <class _Tp>
-  bool list_iterator<_Tp>::operator!=(
-      const iterator& _position) const {
+  auto list_iterator<_Tp>::operator!=(
+      iterator const& _position) const -> bool {
     return m_pNode != _position.m_pNode;
   }
 
