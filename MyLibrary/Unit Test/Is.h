@@ -1,8 +1,7 @@
 /**
  *  Is.h
  *
- *  @author Raul Butuc.
- *  @version 1.0.0 21/08/2015
+ *  @author Raul Butuc
  */
 
 #pragma once

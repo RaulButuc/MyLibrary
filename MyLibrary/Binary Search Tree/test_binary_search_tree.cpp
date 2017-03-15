@@ -1,8 +1,7 @@
 /**
  *  test_binary_search_tree.cpp
  *
- *  @author Raul Butuc.
- *  @version 1.0.2 02/11/2015
+ *  @author Raul Butuc
  */
 
 // TODO: Update the Assert and Is classes for better custom data structures support.

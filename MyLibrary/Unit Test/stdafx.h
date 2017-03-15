@@ -1,8 +1,5 @@
 /**
  *  stdafx.h
- *
- *  @author Microsoft Visual Studio
- *  @version 1.0.1 28/08/2015
  */
 
 #pragma once

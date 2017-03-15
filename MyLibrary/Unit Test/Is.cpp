@@ -1,8 +1,7 @@
 /**
 *  Is.cpp
 *
-*  @author Raul Butuc.
-*  @version 1.0.0 21/08/2015
+*  @author Raul Butuc
 */
 
 #include "stdafx.h"

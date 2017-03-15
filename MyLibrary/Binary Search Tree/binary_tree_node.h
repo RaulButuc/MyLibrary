@@ -1,8 +1,7 @@
 /**
  *  binary_tree_node.h
  *
- *  @author Raul Butuc.
- *  @version 1.0.0 14/10/2015
+ *  @author Raul Butuc
  */
 
 #pragma once

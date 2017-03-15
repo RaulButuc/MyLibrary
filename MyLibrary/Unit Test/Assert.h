@@ -1,8 +1,7 @@
 /**
 *  Assert.h
 *
-*  @author Raul Butuc.
-*  @version 1.0.1 28/08/2015
+*  @author Raul Butuc
 */
 
 #pragma once

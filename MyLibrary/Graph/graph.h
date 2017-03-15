@@ -2,7 +2,6 @@
 *  graph.h
 *
 *  @author Raul Butuc
-*  @version 1.0.2 14/03/2017
 */
 
 #pragma once
