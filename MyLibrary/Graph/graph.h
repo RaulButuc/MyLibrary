@@ -6,7 +6,7 @@
 
 #pragma once
 
-#include "list.h"
+#include "forward_list.h"
 #include "graph_node.h"
 #include "graph_type.h"
 #include <vector>
@@ -29,15 +29,35 @@ namespace my_library {
     graph(GRAPH_TYPE, bool);
     graph(GRAPH_TYPE, double);
     graph(GRAPH_TYPE, bool, double);
+    auto addNode(_Tp const&) -> void;
+    auto addNode(graph_node<_Tp> const&) -> void;
+    auto addNodes(std::vector<_Tp> const&) -> void;
+    auto addNodes(std::vector<graph_node<_Tp>> const&) -> void;
     auto getType() const -> GRAPH_TYPE;
     auto setType(GRAPH_TYPE const&) -> void;
     auto isWeighted() const -> bool;
     auto setWeighted(bool const&) -> void;
+    auto getNrNodes() const -> int;
+    auto getNrEdges() const -> int;
+    auto getNodeInnerDegree(graph_node<_Tp> const&) const -> int;
+    auto getNodeOuterDegree(graph_node<_Tp> const&) const -> int;
+    auto getNodeDegree(graph_node<_Tp> const&) const-> int;
+    auto isComplete() const -> bool;
+    auto isSimple() const -> bool;
+    auto isMultigraph() const -> bool;
+    auto isQuiver() const -> bool;
+    auto isConnected() const -> bool;
+    auto isStronglyConnected() const -> bool;
     auto isSparse() const -> bool;
     auto isDense() const -> bool;
+    auto isPath() const -> bool;
+    auto isPlanar() const -> bool;
+    auto isCycle() const -> bool;
+    auto isInterval() const -> bool;
+    auto isBipartite() const -> bool;
     auto isHamiltonian() const -> bool;
     auto isEulerian() const -> bool;
-    auto shortestPath(graph_node, graph_node) -> list<graph_node>;
+    auto shortestPath(graph_node<_Tp>, graph_node<_Tp>) -> list<graph_node<_Tp>>;
     ~graph();
 
   private:
@@ -45,7 +65,7 @@ namespace my_library {
     GRAPH_TYPE type;
     bool weighted;
     double densityThreshold;
-    std::vector<graph_node> nodes;
+    std::vector<graph_node<_Tp>> nodes;
 
     auto computeDensity() const -> double;
 
@@ -70,6 +90,22 @@ namespace my_library {
       weighted(_weighted), densityThreshold(_densityThreshold) { }
 
   template <class _Tp>
+  auto my_library::graph<_Tp>::addNode(_Tp const& _value) -> void {
+    graph_node<_Tp> node(_value);
+    nodes.push_back(node);
+  }
+
+  template<class _Tp>
+  auto my_library::graph<_Tp>::addNode(graph_node<_Tp> const& _node) -> void {
+    nodes.push_back(_node);
+  }
+
+  template<class _Tp>
+  inline auto graph<_Tp>::addNodes(std::vector<_Tp> const &) -> void
+  {
+  }
+
+  template <class _Tp>
   auto graph<_Tp>::getType() const -> GRAPH_TYPE {
     return type;
   }
@@ -90,6 +126,82 @@ namespace my_library {
   }
 
   template <class _Tp>
+  auto my_library::graph<_Tp>::getNrNodes() const -> int {
+    return nodes.size();
+  }
+
+  template <class _Tp>
+  auto my_library::graph<_Tp>::getNrEdges() const -> int {
+    for (auto node : nodes) {
+      auto neighbours = node.getNeighbours();
+      return neighbours.size();
+    }
+  }
+
+  template<class _Tp>
+  auto graph<_Tp>::getNodeInnerDegree(graph_node<_Tp> const& _node) const -> int {
+    if (type == GRAPH_TYPE::Directed) {
+      return 0; // The inner degree
+    }
+
+    return getNodeDegree(_node);
+  }
+
+  template<class _Tp>
+  auto graph<_Tp>::getNodeOuterDegree(graph_node<_Tp> const& _node) const -> int {
+    if (type == GRAPH_TYPE::Directed) {
+      return 0; // The outer degree
+    }      
+
+    return getNodeDegree(_node);
+  }
+
+  template<class _Tp>
+  auto graph<_Tp>::getNodeDegree(graph_node<_Tp> const& _node) const -> int {
+    if (type == GRAPH_TYPE::Undirected) {
+        return _node.getNeighbours().size();      
+    }
+
+    return -1;
+  }
+
+  template<class _Tp>
+  inline auto graph<_Tp>::isComplete() const -> bool
+  {
+    return false;
+  }
+
+  template<class _Tp>
+  inline auto graph<_Tp>::isSimple() const -> bool
+  {
+    return false;
+  }
+
+  template<class _Tp>
+  inline auto graph<_Tp>::isMultigraph() const -> bool
+  {
+    return false;
+  }
+
+  template<class _Tp>
+  inline auto graph<_Tp>::isQuiver() const -> bool
+  {
+    return false;
+  }
+
+  template<class _Tp>
+  inline auto graph<_Tp>::isConnected() const -> bool
+  {
+    return false;
+  }
+
+  template<class _Tp>
+  inline auto graph<_Tp>::isStronglyConnected() const -> bool
+  {
+    return false;
+  }
+
+  template <class _Tp>
   auto graph<_Tp>::isSparse() const -> bool {
     double density = computeDensity();
     if (density < densityThreshold) {
@@ -103,6 +215,36 @@ namespace my_library {
   template <class _Tp>
   auto graph<_Tp>::isDense() const -> bool {
     return !isSparse();
+  }
+
+  template<class _Tp>
+  inline auto graph<_Tp>::isPath() const -> bool
+  {
+    return false;
+  }
+
+  template<class _Tp>
+  inline auto graph<_Tp>::isPlanar() const -> bool
+  {
+    return false;
+  }
+
+  template<class _Tp>
+  inline auto graph<_Tp>::isCycle() const -> bool
+  {
+    return false;
+  }
+
+  template<class _Tp>
+  inline auto graph<_Tp>::isInterval() const -> bool
+  {
+    return false;
+  }
+
+  template<class _Tp>
+  inline auto graph<_Tp>::isBipartite() const -> bool
+  {
+    return false;
   }
 
   template <class _Tp>
@@ -125,15 +267,23 @@ namespace my_library {
 
   template <class _Tp>
   auto graph<_Tp>::computeDensity() const -> double {
-    int edges = 0; // to be updated
-    int vertices = 0; // to be updated
+    int edges = getNrEdges();
+    int nodes = getNrNodes();
 
-    if (this.type == GRAPH_TYPE.Undirected) {
-      return (2 * edges) / (vertices * (vectices - 1));
+    switch (this.type) {
+      case GRAPH_TYPE::Undirected:
+        return (2 * edges) / (nodes * (nodes - 1));
+        break;
+
+      case GRAPH_TYPE::Directed:
+        return edges / (nodes * (nodes - 1));
+        break;
+
+      default:
+        break;
     }
-    else {
-      return edges / (vertices * (vectices - 1));
-    }
+    
+    return -1;
   }
 
 }
