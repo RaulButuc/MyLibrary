@@ -60,7 +60,7 @@ namespace my_library {
 
   template <class _Tp>
   graph_node<_Tp>::graph_node(_Tp const& _value, list<_Tp> const& _neighbours)
-    : value(_value) {
+      : value(_value) {
     for (auto it = _neighbours.begin(); it != _neighbours.end(); ++it) {
       graph_node newNeighbour = graph_node(*it);
       neighbours.push_back(newNeighbour);
@@ -69,7 +69,7 @@ namespace my_library {
 
   template <class _Tp>
   graph_node<_Tp>::graph_node(graph_node const& _node, list<_Tp> const& _neighbours)
-    : value(_node.getValue()) {
+      : value(_node.getValue()) {
     for (auto it = _neighbours.begin(); it != _neighbours.end(); ++it) {
       graph_node newNeighbour = graph_node(*it);
       neighbours.push_back(newNeighbour);
@@ -78,7 +78,7 @@ namespace my_library {
 
   template <class _Tp>
   graph_node<_Tp>::graph_node(_Tp const& _value, list<graph_node> const& _neighbours)
-    : value(_value) {
+      : value(_value) {
     for (auto it = _neighbours.begin(); it != _neighbours.end(); ++it) {
       graph_node newNeighbour = graph_node(*it);
       neighbours.push_back(newNeighbour);
@@ -87,7 +87,7 @@ namespace my_library {
 
   template <class _Tp>
   graph_node<_Tp>::graph_node(graph_node const& _node, list<graph_node> const& _neighbours)
-    : value(_node.getValue()) {
+      : value(_node.getValue()) {
     for (auto it = _neighbours.begin(); it != _neighbours.end(); ++it) {
       graph_node newNeighbour = graph_node(*it);
       neighbours.push_back(newNeighbour);
