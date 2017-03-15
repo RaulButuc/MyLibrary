@@ -19,9 +19,9 @@ namespace my_library {
   class UNITTEST_API Assert {
 
     public:
-      static void That(bool, bool);
-      static void That(long, std::pair<char, long>);
-      static void That(std::string, std::pair<char, std::string>);
+      static auto That(bool, bool) -> void;
+      static auto That(long, std::pair<char, long>) -> void;
+      static auto That(std::string, std::pair<char, std::string>) -> void;
 
   };
 

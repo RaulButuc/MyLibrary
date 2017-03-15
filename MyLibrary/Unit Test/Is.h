@@ -20,10 +20,10 @@ namespace my_library {
   class UNITTEST_API Is {
     
     public:
-      static std::pair<char, long> LessThan(long);
-      static std::pair<char, long> EqualTo(long);
-      static std::pair<char, long> GreaterThan(long);
-      static std::pair<char, std::string> EqualTo(std::string);
+      static auto LessThan(long) -> std::pair<char, long>;
+      static auto EqualTo(long) -> std::pair<char, long>;
+      static auto GreaterThan(long) -> std::pair<char, long>;
+      static auto EqualTo(std::string) -> std::pair<char, std::string>;
 
       static const bool False = false;
       static const bool True = true;

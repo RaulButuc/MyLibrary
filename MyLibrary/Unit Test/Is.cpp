@@ -9,18 +9,18 @@
 
 using namespace my_library;
 
-std::pair<char, long> Is::LessThan(long expectedValue) {
+auto Is::LessThan(long expectedValue) -> std::pair<char, long> {
   return std::make_pair('<', expectedValue);
 }
 
-std::pair<char, long> Is::EqualTo(long expectedValue) {
+auto Is::EqualTo(long expectedValue) -> std::pair<char, long> {
   return std::make_pair('=', expectedValue);
 }
 
-std::pair<char, long> Is::GreaterThan(long expectedValue) {
+auto Is::GreaterThan(long expectedValue) -> std::pair<char, long> {
   return std::make_pair('>', expectedValue);
 }
 
-std::pair<char, std::string> Is::EqualTo(std::string expectedValue) {
+auto Is::EqualTo(std::string expectedValue) -> std::pair<char, std::string> {
   return std::make_pair('=', expectedValue);
 }

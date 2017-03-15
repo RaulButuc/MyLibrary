@@ -9,14 +9,14 @@
 
 using namespace my_library;
 
-void Assert::That(bool actualValue, bool expectedValue) {
+auto Assert::That(bool actualValue, bool expectedValue) -> void {
   if (actualValue != expectedValue) {
     std::cout << "Error: Actual value does not match the expected value.\n" <<
       "    " << actualValue << " != " << expectedValue;
   }
 }
 
-void Assert::That(long actualValue, std::pair<char, long> expected) {
+auto Assert::That(long actualValue, std::pair<char, long> expected) -> void {
   char expectedOperation = expected.first;
   long expectedValue = expected.second;
 
@@ -47,7 +47,7 @@ void Assert::That(long actualValue, std::pair<char, long> expected) {
   }
 }
 
-void Assert::That(std::string actualValue, std::pair<char, std::string> expected) {
+auto Assert::That(std::string actualValue, std::pair<char, std::string> expected) -> void {
   char expectedOperation = expected.first;
   std::string expectedValue = expected.second;
 
