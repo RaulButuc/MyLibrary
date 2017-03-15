@@ -1,8 +1,7 @@
 /**
  *  forward_list_node.h
  *
- *  @author Raul Butuc.
- *  @version 1.2.1 28/03/2015
+ *  @author Raul Butuc
  */
 
 #pragma once
@@ -22,14 +21,15 @@ namespace my_library {
     friend class forward_list_const_iterator<_Tp>;
 
     private:
+
       _Tp m_Value;
 
-      forward_list_node(const _Tp&);
+      forward_list_node(_Tp const&);
 
   };
 
   template <class _Tp>
-  forward_list_node<_Tp>::forward_list_node(const _Tp& _value)
+  forward_list_node<_Tp>::forward_list_node(_Tp const& _value)
       : m_Value(_value), forward_list_node_base() {}
   
 }

@@ -1,8 +1,7 @@
 /**
  *  test_forward_list.cpp
  *
- *  @author Raul Butuc.
- *  @version 1.3.1 28/08/2015
+ *  @author Raul Butuc
  */
 
 // Not yet updated to make use of the custom unit test framework.

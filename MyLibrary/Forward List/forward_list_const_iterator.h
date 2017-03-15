@@ -1,8 +1,7 @@
 /**
  *  forward_list_const_iterator.h
  *
- *  @author Raul Butuc.
- *  @version 1.2.1 28/08/2015
+ *  @author Raul Butuc
  */
 
 #pragma once
@@ -21,6 +20,7 @@ namespace my_library {
     friend class forward_list<_Tp>;
 
     public:
+
       typedef forward_list_const_iterator<_Tp> const_iterator;
       typedef size_t size_type;
       typedef _Tp value_type;
@@ -29,15 +29,16 @@ namespace my_library {
       typedef std::forward_iterator_tag iterator_category;
       typedef size_t difference_type;
 
-      const const_iterator& operator++();
-      const const_iterator& operator++(int);
-      const const_iterator& operator+=(int);
-      reference operator*() const;
-      pointer operator->() const;
-      bool operator==(const const_iterator&) const;
-      bool operator!=(const const_iterator&) const;
+      auto operator++() -> const_iterator const&;
+      auto operator++(int) -> const_iterator const&;
+      auto operator+=(int) -> const_iterator const&;
+      auto operator*() const -> reference;
+      auto operator->() const -> pointer;
+      auto operator==(const_iterator const&) const -> bool;
+      auto operator!=(const_iterator const&) const -> bool;
 
     private:
+
       forward_list_node_base* m_pNode;
 
       forward_list_const_iterator(forward_list_node_base*);
@@ -50,49 +51,49 @@ namespace my_library {
       : m_pNode(_node) {}
 
   template <class _Tp>
-  const typename forward_list_const_iterator<_Tp>::const_iterator&
-  forward_list_const_iterator<_Tp>::operator++() {
+  auto forward_list_const_iterator<_Tp>::operator++()
+      -> typename forward_list_const_iterator<_Tp>::const_iterator const& {
     if (m_pNode == nullptr) return static_cast<const const_iterator&>(nullptr);
     m_pNode = m_pNode->m_pNext;
     return *this;
   }
 
   template <class _Tp>
-  const typename forward_list_const_iterator<_Tp>::const_iterator&
-   forward_list_const_iterator<_Tp>::operator++(int) {
+  auto forward_list_const_iterator<_Tp>::operator++(int)
+      -> typename forward_list_const_iterator<_Tp>::const_iterator const& {
     forward_list_const_iterator<_Tp> _temp(*this);
     ++(*this);
     return _temp;
   }
   
   template <class _Tp>
-  const typename forward_list_const_iterator<_Tp>::const_iterator&
-  forward_list_const_iterator<_Tp>::operator+=(int _num) {
+  auto forward_list_const_iterator<_Tp>::operator+=(int _num)
+      -> typename forward_list_const_iterator<_Tp>::const_iterator const& {
     for (int i = 0; i < _num; ++i, ++(*this));
     return *this;
   }
 
   template <class _Tp>
-  typename forward_list_const_iterator<_Tp>::reference
-  forward_list_const_iterator<_Tp>::operator*() const {
+  auto forward_list_const_iterator<_Tp>::operator*() const
+      -> typename forward_list_const_iterator<_Tp>::reference {
     return static_cast<forward_list_node<_Tp>*>(m_pNode)->m_Value;
   }
 
   template <class _Tp>
-  typename forward_list_const_iterator<_Tp>::pointer
-  forward_list_const_iterator<_Tp>::operator->() const {
+  auto forward_list_const_iterator<_Tp>::operator->() const
+      -> typename forward_list_const_iterator<_Tp>::pointer {
     return static_cast<forward_list_node<_Tp>*>(m_pNode);
   }
 
   template <class _Tp>
-  bool forward_list_const_iterator<_Tp>::operator==(
-      const const_iterator& _position) const {
+  auto forward_list_const_iterator<_Tp>::operator==(
+      const_iterator const& _position) const -> bool {
     return m_pNode == _position.m_pNode;
   }
 
   template <class _Tp>
-  bool forward_list_const_iterator<_Tp>::operator!=(
-      const const_iterator& _position) const {
+  auto forward_list_const_iterator<_Tp>::operator!=(
+      const_iterator const& _position) const -> bool {
     return m_pNode != _position.m_pNode;
   }
 
