@@ -6,12 +6,14 @@ A personal and custom library that will eventually contain all the common data s
 - Singly Linked List (Forward List)
 - Doubly Linked List (List)
 - Binary Search Tree
+- Graph
 
 ### Coming soon
 
 - Stack
 - Queue
 - Double Ended Queue (Deque)
+- Treap
 - Red-Black Tree
 - AVL Tree
-- Graph
+- Trie
