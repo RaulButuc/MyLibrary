@@ -90,19 +90,29 @@ namespace my_library {
       weighted(_weighted), densityThreshold(_densityThreshold) { }
 
   template <class _Tp>
-  auto my_library::graph<_Tp>::addNode(_Tp const& _value) -> void {
+  auto graph<_Tp>::addNode(_Tp const& _value) -> void {
     graph_node<_Tp> node(_value);
     nodes.push_back(node);
   }
 
   template<class _Tp>
-  auto my_library::graph<_Tp>::addNode(graph_node<_Tp> const& _node) -> void {
+  auto graph<_Tp>::addNode(graph_node<_Tp> const& _node) -> void {
     nodes.push_back(_node);
   }
 
   template<class _Tp>
-  inline auto graph<_Tp>::addNodes(std::vector<_Tp> const &) -> void
-  {
+  auto graph<_Tp>::addNodes(std::vector<_Tp> const& _values) -> void {
+    for (auto value : _values) {
+      graph_node<_Tp> node(value);
+      nodes.push_back(node);
+    }
+  }
+
+  template<class _Tp>
+  auto graph<_Tp>::addNodes(std::vector<graph_node<_Tp>> const& _nodes) -> void {
+    for (auto node : _nodes) {
+      nodes.push_back(node);
+    }
   }
 
   template <class _Tp>

@@ -22,7 +22,7 @@
     <ProjectGuid>{73AB4480-2264-4736-91C8-8DE6F0BBC1D2}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>Graph</RootNamespace>
-    <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.14393.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -71,7 +71,7 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>D:\Git\MyLibrary\MyLibrary\List;$(IncludePath)</IncludePath>
+    <IncludePath>D:\Programming\Personal\Projects\MyLibrary\MyLibrary\Forward List;D:\Programming\Personal\Projects\MyLibrary\MyLibrary\Unit Test;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
@@ -150,6 +150,9 @@
     <ClInclude Include="graph.h" />
     <ClInclude Include="graph_type.h" />
     <ClInclude Include="graph_node.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="test_graph.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

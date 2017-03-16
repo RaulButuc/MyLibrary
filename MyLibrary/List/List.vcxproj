@@ -17,13 +17,11 @@
     <ClInclude Include="list_node.h" />
     <ClInclude Include="list_node_base.h" />
   </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="test_list.cpp" />
-  </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{4C8CB3C8-3289-4472-A842-F942DE01A3D1}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>List</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0.14393.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
