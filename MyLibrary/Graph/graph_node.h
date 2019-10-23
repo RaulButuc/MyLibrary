@@ -29,7 +29,7 @@ namespace my_library {
       graph_node(_Tp const&, forward_list<graph_node<_Tp>> const&);
       graph_node(graph_node<_Tp> const&, forward_list<graph_node<_Tp>> const&);
       auto setValue(_Tp const&) -> void;
-      auto getValue() const->_Tp;
+      auto getValue() const -> _Tp;
       auto addNeighbour(_Tp const&) -> void;
       auto addNeighbour(graph_node<_Tp> const&) -> void;
       auto addNeighbours(forward_list<_Tp> const&) -> void;
